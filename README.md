@@ -1,29 +1,31 @@
-# SSH Fleet
+<p align="center">
+  <a href="https://github.com/flantofun/ssh-fleet/releases/latest"><img src="https://img.shields.io/github/v/release/flantofun/ssh-fleet?style=flat-square" alt="Latest Release"></a>
+  <a href="https://github.com/flantofun/ssh-fleet/blob/main/package.json"><img src="https://img.shields.io/badge/Node.js-%3E%3D18-green?style=flat-square&logo=node.js" alt="Node Version"></a>
+  <a href="https://github.com/flantofun/ssh-fleet/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/flantofun/ssh-fleet/ci.yml?branch=main&label=CI&style=flat-square" alt="CI"></a>
+  <a href="https://github.com/flantofun/ssh-fleet/blob/main/LICENSE"><img src="https://img.shields.io/github/license/flantofun/ssh-fleet?style=flat-square" alt="License"></a>
+  <a href="https://www.npmjs.com/package/ssh-fleet"><img src="https://img.shields.io/badge/npm-ssh--fleet-blue?style=flat-square&logo=npm" alt="npm"></a>
+</p>
 
-> ⚡ **Run commands across all your servers in parallel — from a single, dependency-free CLI.**
+<h1 align="center">SSH Fleet</h1>
+
+<p align="center">
+  English | <a href="README_CN.md">简体中文</a>
+</p>
+
+<p align="center">
+  ⚡ Run commands across all your servers in parallel — from a single, dependency-free CLI.
+</p>
+
+<p align="center">
+  <a href="#install">Install</a> · <a href="#quick-start">Quick Start</a> · <a href="#commands">Commands</a> · <a href="#configuration">Config</a>
+</p>
+
+---
 
 SSH Fleet is a lightweight Node.js CLI for managing and operating on a fleet of
 SSH hosts. Define your servers once in a YAML or JSON file, then execute shell
 commands across all (or a subset) of them in parallel, stream results, push or
 pull files, and get machine-readable JSON output for scripting.
-
----
-
-> ⚡ **一行命令，同时在所有服务器上并行执行。**
->
-> SSH Fleet 是一个轻量级 Node.js CLI 工具，用于管理多台 SSH 主机。只需用
-> 一个 YAML 或 JSON 文件定义你的服务器清单，就能并行执行命令、筛选目标
-> 主机、推送或拉取文件，并输出 JSON 格式结果供脚本消费。
->
-> - 🚀 **并行执行**，可自定义并发数
-> - 🏷️ **标签筛选**（`--hosts tag:prod`）
-> - 📊 **多种输出格式**：分组、合并、JSON、静默
-> - 🔑 **密钥 / 密码认证**，支持 agent 转发
-> - 📦 **配置即代码** — YAML / JSON，自动向上查找
-> - 🔄 **文件传输** — 基于 SFTP 的 push / pull
-> - ❤️ **MIT 协议**，TypeScript 编写，附完整测试
-
----
 
 - 🚀 **Parallel execution** with configurable concurrency
 - 🏷️ **Tag-based host selection** (`--hosts tag:prod`)
@@ -262,4 +264,4 @@ node dist/cli.js exec 'uptime'
 
 ## License
 
-MIT © 2026 qingmeijiu
+MIT © 2026 flantofun
