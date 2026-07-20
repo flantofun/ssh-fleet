@@ -1,0 +1,31 @@
+# ssh-fleet configuration
+# Docs: https://github.com/qingmeijiu/ssh-fleet
+
+# Defaults applied to every host unless overridden
+defaultUser: root
+defaultPort: 22
+defaultPrivateKeyPath: ~/.ssh/id_rsa
+
+hosts:
+  # Web tier
+  - name: web-1
+    host: 192.168.1.10
+    tags: [web, prod]
+
+  - name: web-2
+    host: 192.168.1.11
+    tags: [web, prod]
+
+  # Database tier
+  - name: db-1
+    host: 192.168.1.20
+    user: postgres
+    port: 2222
+    privateKeyPath: ~/.ssh/db_key
+    tags: [db, prod]
+
+  # Staging
+  - name: staging-1
+    host: staging.example.com
+    user: deploy
+    tags: [web, staging]
