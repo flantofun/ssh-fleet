@@ -7,6 +7,24 @@ SSH hosts. Define your servers once in a YAML or JSON file, then execute shell
 commands across all (or a subset) of them in parallel, stream results, push or
 pull files, and get machine-readable JSON output for scripting.
 
+---
+
+> ⚡ **一行命令，同时在所有服务器上并行执行。**
+>
+> SSH Fleet 是一个轻量级 Node.js CLI 工具，用于管理多台 SSH 主机。只需用
+> 一个 YAML 或 JSON 文件定义你的服务器清单，就能并行执行命令、筛选目标
+> 主机、推送或拉取文件，并输出 JSON 格式结果供脚本消费。
+>
+> - 🚀 **并行执行**，可自定义并发数
+> - 🏷️ **标签筛选**（`--hosts tag:prod`）
+> - 📊 **多种输出格式**：分组、合并、JSON、静默
+> - 🔑 **密钥 / 密码认证**，支持 agent 转发
+> - 📦 **配置即代码** — YAML / JSON，自动向上查找
+> - 🔄 **文件传输** — 基于 SFTP 的 push / pull
+> - ❤️ **MIT 协议**，TypeScript 编写，附完整测试
+
+---
+
 - 🚀 **Parallel execution** with configurable concurrency
 - 🏷️ **Tag-based host selection** (`--hosts tag:prod`)
 - 📊 **Multiple output formats** — grouped, combined, JSON, silent
