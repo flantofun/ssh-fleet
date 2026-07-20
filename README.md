@@ -4,6 +4,7 @@
   <a href="https://github.com/flantofun/ssh-fleet/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/flantofun/ssh-fleet/ci.yml?branch=main&label=CI&style=flat-square" alt="CI"></a>
   <a href="https://github.com/flantofun/ssh-fleet/blob/main/LICENSE"><img src="https://img.shields.io/github/license/flantofun/ssh-fleet?style=flat-square" alt="License"></a>
   <a href="https://www.npmjs.com/package/ssh-fleet"><img src="https://img.shields.io/badge/npm-ssh--fleet-blue?style=flat-square&logo=npm" alt="npm"></a>
+  <a href="DEVPOST.md"><img src="https://img.shields.io/badge/OpenAI_Build_Week-Codex_+_GPT--5.6-000000?style=flat-square&logo=openai" alt="Built with Codex and GPT-5.6"></a>
 </p>
 
 <h1 align="center">SSH Fleet</h1>
@@ -32,6 +33,7 @@ commands across all (or a subset) of them in parallel, stream results, push or
 pull files, and get machine-readable JSON output for scripting.
 
 - 🚀 **Parallel execution** with configurable concurrency
+- 📜 **Multi-line scripts** sent directly from a local file
 - 🏷️ **Tag-based host selection** (`--hosts tag:prod`)
 - 📊 **Multiple output formats** — grouped, combined, JSON, silent
 - 🔑 **SSH key + password auth**, agent forwarding support
@@ -161,6 +163,20 @@ ssh-fleet copy push ./nginx.conf /etc/nginx/nginx.conf --hosts tag:web
 ssh-fleet copy pull /var/log/syslog ./syslog --hosts web-1
 ```
 
+## Try it without SSH servers
+
+The Docker demo starts two disposable SSH hosts on your machine, so the complete
+workflow can be judged without cloud credentials or existing infrastructure.
+
+```bash
+npm install && npm run build
+docker compose -f examples/docker-demo/compose.yml up -d --build
+node dist/cli.js list --config examples/docker-demo/ssh-fleet.yml
+node dist/cli.js exec 'hostname && uptime' --config examples/docker-demo/ssh-fleet.yml
+node dist/cli.js run examples/docker-demo/health-check.sh --config examples/docker-demo/ssh-fleet.yml
+docker compose -f examples/docker-demo/compose.yml down
+```
+
 ## Commands
 
 ### `exec <command>`
@@ -180,6 +196,24 @@ Run a shell command on selected hosts.
 ```bash
 # JSON output for piping into jq
 ssh-fleet exec 'hostname' -o json | jq '.[] | select(.exitCode==0) | .name'
+```
+
+### `run <script-file>`
+
+Run a local multi-line shell script on the selected hosts. The script does not
+need to be copied to the remote machines first and accepts the same execution
+flags as `exec`.
+
+```bash
+cat > deploy.sh <<'EOF'
+set -e
+cd /srv/my-app
+git pull --ff-only
+npm ci --omit=dev
+sudo systemctl restart my-app
+EOF
+
+ssh-fleet run ./deploy.sh --hosts tag:web --concurrency 4 --fail-fast
 ```
 
 ### `list`
@@ -248,7 +282,7 @@ command everywhere, right now.
 
 ## Roadmap
 
-- [ ] `run` command for multi-line scripts from a file
+- [x] `run` command for multi-line scripts from a file
 - [ ] Diff mode: show only hosts where output differs
 - [ ] Interactive host picker (fzf-style)
 - [ ] Docker image for CI pipelines
@@ -265,6 +299,14 @@ npm run dev -- list          # run via tsx
 npm run build                # compile to dist/
 node dist/cli.js exec 'uptime'
 ```
+
+## Built with Codex + GPT-5.6
+
+SSH Fleet's Build Week iteration was developed with Codex using GPT-5.6. Codex
+reviewed the command architecture, implemented the multi-line `run` workflow,
+strengthened option validation, added tests, and prepared the reproducible judge
+experience. See [CODEX_BUILD_LOG.md](CODEX_BUILD_LOG.md) for the implementation
+record and verification evidence.
 
 ## License
 

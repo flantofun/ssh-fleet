@@ -1,0 +1,12 @@
+defaultUser: fleet
+defaultPassword: fleet-demo
+
+hosts:
+  - name: web-1
+    host: 127.0.0.1
+    port: 2221
+    tags: [web, demo]
+  - name: web-2
+    host: 127.0.0.1
+    port: 2222
+    tags: [web, demo]

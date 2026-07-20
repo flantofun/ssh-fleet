@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.0] - 2026-07-20
+
+### Added
+- **`run <script-file>`** for executing local multi-line scripts across selected hosts.
+- **Disposable Docker demo** with two SSH hosts for credential-free evaluation.
+- **Codex + GPT-5.6 build log** and OpenAI Build Week submission documentation.
+- **4 new tests** covering script loading and explicit config forwarding.
+
+### Fixed
+- Validate concurrency, timeout, and output mode before opening SSH connections.
+- Forward `--config <path>` correctly from the `list` CLI command.
+
 ## [0.1.0] - 2026-07-20
 
 ### Added

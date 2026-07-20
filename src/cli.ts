@@ -7,7 +7,8 @@ import { execCommand } from "./commands/exec.js";
 import { initCommand } from "./commands/init.js";
 import { listCommand } from "./commands/list.js";
 import { copyCommand } from "./commands/copy.js";
-import { parseArgs, optString, optBool, optInt } from "./utils/args.js";
+import { runCommand } from "./commands/run.js";
+import { parseArgs, optBool, optString } from "./utils/args.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const pkg = JSON.parse(readFileSync(join(__dirname, "..", "package.json"), "utf8"));
@@ -24,6 +25,7 @@ function usage(): void {
   console.log();
   console.log("Commands:");
   console.log("  exec <command>        Run a shell command on selected hosts");
+  console.log("  run <script-file>     Run a local shell script on selected hosts");
   console.log("  copy push|pull        Transfer a file via SFTP");
   console.log("  list                  List configured hosts");
   console.log("  init                  Create a fleet config file");
@@ -41,6 +43,7 @@ function usage(): void {
   console.log("  ssh-fleet exec 'df -h' --hosts tag:web");
   console.log("  ssh-fleet exec 'docker ps' --hosts web-1,db-1 --concurrency 2");
   console.log("  ssh-fleet exec 'free -m' --output json");
+  console.log("  ssh-fleet run ./deploy.sh --hosts tag:web");
   console.log("  ssh-fleet list");
   console.log("  ssh-fleet list --verbose");
   console.log("  ssh-fleet status");
@@ -62,12 +65,17 @@ async function main(): Promise<void> {
       execCommand(rest);
       break;
     }
+    case "run": {
+      runCommand(rest);
+      break;
+    }
     case "list": {
       const listArgs = parseArgs(rest);
       listCommand({
         verbose: optBool(listArgs, "verbose", "v"),
         json: optBool(listArgs, "json", "j"),
         tags: optBool(listArgs, "tags", "t"),
+        config: optString(listArgs, "config"),
       });
       break;
     }

@@ -1,0 +1,12 @@
+services:
+  web-1:
+    build: .
+    hostname: web-1
+    ports:
+      - "2221:22"
+
+  web-2:
+    build: .
+    hostname: web-2
+    ports:
+      - "2222:22"

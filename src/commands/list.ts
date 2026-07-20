@@ -6,15 +6,22 @@ import { HostConfig } from "../core/types.js";
 import type { ResolvedHost } from "../core/exec.js";
 import { loadFleetConfig } from "./init.js";
 
-export function listCommand(_args: { verbose?: boolean; json?: boolean; tags?: boolean }): void {
-  const { config, path } = loadFleetConfig();
+export interface ListCommandOptions {
+  verbose?: boolean;
+  json?: boolean;
+  tags?: boolean;
+  config?: string;
+}
+
+export function listCommand(args: ListCommandOptions): void {
+  const { config, path } = loadFleetConfig(args.config);
   if (!config) {
     console.error("No fleet config found. Run `ssh-fleet init` first.");
     process.exit(1);
   }
   const hosts = (config.hosts as HostConfig[]) ?? [];
 
-  if (_args.json) {
+  if (args.json) {
     console.log(JSON.stringify(hosts, null, 2));
     return;
   }

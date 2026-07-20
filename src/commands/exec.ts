@@ -1,6 +1,6 @@
-import { execAcrossHosts, execOnHost, ResolvedHost } from "../core/exec.js";
+import { execAcrossHosts, ResolvedHost } from "../core/exec.js";
 import { printResults } from "../core/output.js";
-import { parseArgs, optString, optInt, optBool } from "../utils/args.js";
+import { parseArgs, optString, optInt, optBool, ParsedArgs } from "../utils/args.js";
 import { loadHosts } from "./list.js";
 
 export function execCommand(rawArgs: string[]): void {
@@ -12,6 +12,10 @@ export function execCommand(rawArgs: string[]): void {
     process.exit(1);
   }
 
+  executeCommand(command, args);
+}
+
+export function executeCommand(command: string, args: ParsedArgs): void {
   const hosts = loadHosts(optString(args, "config"));
   const selector = optString(args, "hosts", "selector");
   const selected = selector ? selectHosts(hosts, selector) : hosts;
@@ -21,16 +25,33 @@ export function execCommand(rawArgs: string[]): void {
     process.exit(1);
   }
 
+  const concurrency = optInt(args, "concurrency", "c") ?? 8;
+  const timeoutMs = optInt(args, "timeout", "t");
+  const output = optString(args, "output", "o") ?? "grouped";
+
+  if (!Number.isInteger(concurrency) || concurrency < 1) {
+    console.error("Concurrency must be a positive integer.");
+    process.exit(1);
+  }
+  if (timeoutMs !== undefined && (!Number.isInteger(timeoutMs) || timeoutMs < 1)) {
+    console.error("Timeout must be a positive integer in milliseconds.");
+    process.exit(1);
+  }
+  if (!["combined", "grouped", "json", "silent"].includes(output)) {
+    console.error(`Unknown output mode: ${output}`);
+    process.exit(1);
+  }
+
   const opts = {
     parallel: !optBool(args, "sequential", "seq"),
-    concurrency: optInt(args, "concurrency", "c") ?? 8,
-    timeoutMs: optInt(args, "timeout", "t"),
+    concurrency,
+    timeoutMs,
     failFast: optBool(args, "fail-fast", "f"),
-    output: optString(args, "output", "o") as "combined" | "grouped" | "json" | "silent" | undefined,
+    output: output as "combined" | "grouped" | "json" | "silent",
   };
 
   execAcrossHosts(selected, command, opts).then((results) => {
-    printResults(results, opts.output ?? "grouped");
+    printResults(results, opts.output);
     const failed = results.filter((r) => r.exitCode !== 0).length;
     process.exit(failed > 0 ? 1 : 0);
   });
