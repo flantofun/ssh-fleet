@@ -1,6 +1,6 @@
 import { existsSync, writeFileSync, mkdirSync, readFileSync } from "node:fs";
 import { homedir } from "node:os";
-import { join } from "node:path";
+import { join, resolve } from "node:path";
 import YAML from "../utils/yaml.js";
 
 const DEFAULT_CONFIG = {
@@ -27,7 +27,7 @@ const DEFAULT_CONFIG = {
   ],
 };
 
-const YAML_TEMPLATE = `# ssh-fleet configuration — see https://github.com/qingmeijiu/ssh-fleet
+const YAML_TEMPLATE = `# ssh-fleet configuration — see https://github.com/flantofun/ssh-fleet
 defaultUser: root
 defaultPort: 22
 defaultPrivateKeyPath: ${join(homedir(), ".ssh", "id_rsa")}
@@ -51,7 +51,7 @@ const JSON_TEMPLATE = JSON.stringify(DEFAULT_CONFIG, null, 2) + "\n";
 
 export function initCommand(args: { force?: boolean; path?: string; json?: boolean }): void {
   const cwd = process.cwd();
-  const target = args.path ? join(cwd, args.path) : cwd;
+  const target = args.path ? resolve(cwd, args.path) : cwd;
 
   const filename = args.json ? "ssh-fleet.json" : "ssh-fleet.yml";
   const fullPath = join(target, filename);

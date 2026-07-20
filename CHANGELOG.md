@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Validate concurrency, timeout, and output mode before opening SSH connections.
 - Forward `--config <path>` correctly from the `list` CLI command.
+- Resolve absolute `init --path` values correctly and make CI smoke tests portable.
 
 ## [0.1.0] - 2026-07-20
 

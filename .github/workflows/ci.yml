@@ -42,5 +42,5 @@ jobs:
         run: |
           node dist/cli.js version
           node dist/cli.js help
-          node dist/cli.js init --path /tmp/smoke
-          node dist/cli.js list --config /tmp/smoke/ssh-fleet.yml
+          node dist/cli.js init --path smoke-test
+          node dist/cli.js list --config smoke-test/ssh-fleet.yml

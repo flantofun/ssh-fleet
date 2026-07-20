@@ -17,7 +17,9 @@ It then:
 5. Added a disposable two-host Docker environment for judge testing.
 6. Found and fixed an existing `list --config <path>` forwarding bug during the
    end-to-end judge walkthrough.
-7. Updated both English and Chinese documentation and prepared the Devpost entry.
+7. Diagnosed the remote CI failure, corrected absolute `init --path` handling, and
+   made the smoke test portable across Linux, macOS, and Windows.
+8. Updated both English and Chinese documentation and prepared the Devpost entry.
 
 ## Why Codex mattered
 
@@ -33,7 +35,7 @@ The final session ran these checks from a clean dependency install:
 ```text
 npm ci
 npm run typecheck
-npm test          # 31 passed, 0 failed
+npm test          # 32 passed, 0 failed
 npm run build
 node dist/cli.js help
 git diff --check
