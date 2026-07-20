@@ -6,6 +6,7 @@ import { fileURLToPath } from "node:url";
 import { execCommand } from "./commands/exec.js";
 import { initCommand } from "./commands/init.js";
 import { listCommand } from "./commands/list.js";
+import { copyCommand } from "./commands/copy.js";
 import { parseArgs, optString, optBool, optInt } from "./utils/args.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -23,6 +24,7 @@ function usage(): void {
   console.log();
   console.log("Commands:");
   console.log("  exec <command>        Run a shell command on selected hosts");
+  console.log("  copy push|pull        Transfer a file via SFTP");
   console.log("  list                  List configured hosts");
   console.log("  init                  Create a fleet config file");
   console.log("  status                Quick health check (same as `exec hostname && uptime`)");
@@ -76,6 +78,11 @@ async function main(): Promise<void> {
         path: optString(initArgs, "path", "p"),
         json: optBool(initArgs, "json", "j"),
       });
+      break;
+    }
+    case "copy":
+    case "scp": {
+      copyCommand(rest);
       break;
     }
     case "status": {
