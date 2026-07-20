@@ -78,7 +78,43 @@ db-1   postgres@192.168.1.20:22  ✓  [db,prod]
 ssh-fleet exec 'uptime'
 ```
 
-### 4. Target specific hosts
+```
+ OK  web-1 192.168.1.10 45ms
+ 11:51:05 up 142 days, 21:36,  2 users,  load average: 0.08, 0.02, 0.01
+
+ OK  web-2 192.168.1.11 42ms
+ 11:51:05 up 142 days, 21:36,  0 user,  load average: 0.06, 0.02, 0.00
+
+Summary:  2 ok  2 hosts  87ms total
+```
+
+### 4. Health check at a glance
+
+```bash
+ssh-fleet status
+```
+
+```
+ OK  web-1 192.168.1.10 1352ms
+=== HOSTNAME ===
+web-1
+=== UPTIME ===
+ 11:51:05 up 142 days, 21:36,  2 users,  load average: 0.08, 0.02, 0.01
+=== LOAD ===
+0.08 0.02 0.01 1/377 964834
+
+ OK  web-2 192.168.1.11 1320ms
+=== HOSTNAME ===
+web-2
+=== UPTIME ===
+ 11:51:05 up 142 days, 21:36,  0 user,  load average: 0.06, 0.02, 0.00
+=== LOAD ===
+0.06 0.02 0.00 1/197 1452300
+
+Summary:  2 ok  2 hosts  2672ms total
+```
+
+### 5. Target specific hosts
 
 ```bash
 # By name
@@ -89,6 +125,16 @@ ssh-fleet exec 'sudo systemctl restart nginx' --hosts tag:web
 
 # All hosts
 ssh-fleet exec 'free -m' --hosts all
+```
+
+### 6. Transfer files
+
+```bash
+# Push a config file to all web servers
+ssh-fleet copy push ./nginx.conf /etc/nginx/nginx.conf --hosts tag:web
+
+# Pull logs from a single host (saved with .hostname suffix)
+ssh-fleet copy pull /var/log/syslog ./syslog --hosts web-1
 ```
 
 ## Commands
