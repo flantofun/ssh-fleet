@@ -47,5 +47,8 @@ statically reviewed but must be smoke-tested on a Docker-enabled machine.
 
 ## Codex Session ID
 
-The submission owner should paste the ID returned by `/feedback` here and into the
-Devpost submission before the deadline.
+`019f7e47-30f2-70f2-896f-4d4523f71227`
+
+This session covers the repository review, core `run` implementation, validation,
+tests, Docker judge environment, CI diagnosis, documentation, and final release
+verification described above.

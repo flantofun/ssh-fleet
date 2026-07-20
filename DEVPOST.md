@@ -35,6 +35,8 @@ reviewed the command architecture, implemented the multi-line `run` command,
 strengthened execution-option validation, added tests, and prepared the project
 for reproducible judging. The submitted Codex Session ID documents that work.
 
+**Codex Session ID:** `019f7e47-30f2-70f2-896f-4d4523f71227`
+
 ## Challenges
 
 The hardest design constraint was keeping the tool small while handling behavior
@@ -110,6 +112,6 @@ every server, with output humans and pipelines can trust.
 - [ ] Select **Developer Tools** on Devpost
 - [ ] Add the public repository URL and confirm the MIT license is visible
 - [ ] Record and publish a public YouTube video under three minutes with audio
-- [ ] Add the Codex `/feedback` Session ID covering the core implementation
+- [x] Add the Codex `/feedback` Session ID covering the core implementation
 - [ ] Paste the relevant sections above into the Devpost submission form
 - [ ] Verify installation and commands from a fresh clone
