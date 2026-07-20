@@ -210,10 +210,31 @@ Ansible are powerful but heavy; SSH Fleet aims to be the **fast, zero-config
 layer below that** — the thing you reach for when you just need to run one
 command everywhere, right now.
 
+## Comparison
+
+| Feature | ssh-fleet | Ansible | Fabric | pdsh |
+|---------|-----------|---------|--------|------|
+| Setup | npm i -g | pip + inventory | pip | apt/brew |
+| Config | 1 YAML file | inventory + playbooks | Python file | none |
+| Parallel | ✓ | ✓ | ✓ | ✓ |
+| Zero deps on remote | ✓ | ✗ needs Python | ✗ needs Python | ✓ |
+| JSON output | ✓ | ✓ | ✗ | ✗ |
+| File transfer | ✓ | ✓ | ✓ | ✗ |
+| Lightweight | ✓ (Node.js) | ✗ (Python) | ✗ (Python) | ✓ (C) |
+
+## Roadmap
+
+- [ ] `run` command for multi-line scripts from a file
+- [ ] Diff mode: show only hosts where output differs
+- [ ] Interactive host picker (fzf-style)
+- [ ] Docker image for CI pipelines
+- [ ] Shell completions (bash, zsh, fish)
+- [ ] `top` command for live resource monitoring
+
 ## Development
 
 ```bash
-git clone https://github.com/qingmeijiu/ssh-fleet
+git clone https://github.com/flantofun/ssh-fleet
 cd ssh-fleet
 npm install
 npm run dev -- list          # run via tsx
