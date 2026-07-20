@@ -20,6 +20,10 @@
   <a href="#install">Install</a> · <a href="#quick-start">Quick Start</a> · <a href="#commands">Commands</a> · <a href="#configuration">Config</a>
 </p>
 
+<p align="center">
+  <img src="assets/demo.svg" alt="ssh-fleet demo">
+</p>
+
 ---
 
 SSH Fleet is a lightweight Node.js CLI for managing and operating on a fleet of

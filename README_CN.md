@@ -20,6 +20,10 @@
   <a href="#安装">安装</a> · <a href="#快速开始">快速开始</a> · <a href="#命令一览">命令</a> · <a href="#配置文件">配置</a>
 </p>
 
+<p align="center">
+  <img src="assets/demo.svg" alt="ssh-fleet demo">
+</p>
+
 ---
 
 SSH Fleet 是一个轻量级 Node.js CLI 工具，用于在多台 SSH 主机上并行管理和执行命令。

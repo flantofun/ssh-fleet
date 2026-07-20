@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="440" viewBox="0 0 880 440">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1e1e2e"/>
+      <stop offset="100%" stop-color="#181825"/>
+    </linearGradient>
+  </defs>
+  <rect width="880" height="440" fill="url(#bg)" rx="10"/>
+  <!-- title bar -->
+  <rect x="0" y="0" width="880" height="32" fill="#11111b" rx="10"/>
+  <rect x="0" y="22" width="880" height="10" fill="#11111b"/>
+  <circle cx="20" cy="16" r="6" fill="#f38ba8"/>
+  <circle cx="40" cy="16" r="6" fill="#f9e2af"/>
+  <circle cx="60" cy="16" r="6" fill="#a6e3a1"/>
+  <text x="440" y="20" font-family="-apple-system, SF Mono, Monaco, monospace" font-size="12" fill="#6c7086" text-anchor="middle">ssh-fleet — zsh</text>
+
+  <!-- content -->
+  <g font-family="SF Mono, Monaco, Menlo, monospace" font-size="14" xml:space="preserve">
+    <!-- prompt line -->
+    <text x="20" y="56" fill="#89b4fa">$</text>
+    <text x="40" y="56" fill="#cdd6f4">ssh-fleet list</text>
+
+    <text x="20" y="82" fill="#cdd6f4">Fleet hosts: 2 host(s)</text>
+    <text x="20" y="102" fill="#6c7086">Config: /private/tmp/ssh-fleet.yml</text>
+    <text x="20" y="122" fill="#6c7086">Tags: web, prod</text>
+    <text x="20" y="148" fill="#6c7086"></text>
+
+    <text x="20" y="168" fill="#89b4fa" font-weight="bold">web-1</text>
+    <text x="120" y="168" fill="#a6adc8">  root@192.168.1.10:22  </text>
+    <text x="345" y="168" fill="#f9e2af">✓</text>
+    <text x="360" y="168" fill="#94e2d5">  [web,prod]</text>
+
+    <text x="20" y="190" fill="#89b4fa" font-weight="bold">web-2</text>
+    <text x="120" y="190" fill="#a6adc8">  root@192.168.1.11:22  </text>
+    <text x="345" y="190" fill="#f9e2af">✓</text>
+    <text x="360" y="190" fill="#94e2d5">  [web,prod]</text>
+
+    <!-- separator -->
+    <text x="20" y="224" fill="#6c7086"></text>
+
+    <!-- exec command -->
+    <text x="20" y="248" fill="#89b4fa">$</text>
+    <text x="40" y="248" fill="#cdd6f4">ssh-fleet exec 'uptime'</text>
+
+    <text x="20" y="276" fill="#a6e3a1" font-weight="bold"> OK </text>
+    <text x="70" y="276" fill="#cdd6f4" font-weight="bold"> web-1</text>
+    <text x="190" y="276" fill="#6c7086"> 192.168.1.10</text>
+    <text x="310" y="276" fill="#6c7086"> 1264ms</text>
+    <text x="20" y="294" fill="#a6adc8"> 14:21:03 up 143 days,  6 min,  2 users,  load average: 0.00, 0.00, 0.00</text>
+
+    <text x="20" y="322" fill="#a6e3a1" font-weight="bold"> OK </text>
+    <text x="70" y="322" fill="#cdd6f4" font-weight="bold"> web-2</text>
+    <text x="190" y="322" fill="#6c7086"> 192.168.1.11</text>
+    <text x="310" y="322" fill="#6c7086"> 1262ms</text>
+    <text x="20" y="340" fill="#a6adc8"> 14:21:03 up 143 days,  6 min,  0 user,  load average: 0.00, 0.01, 0.00</text>
+
+    <text x="20" y="368" fill="#6c7086"></text>
+    <text x="20" y="392" fill="#cdd6f4" font-weight="bold">Summary:</text>
+    <text x="105" y="392" fill="#a6e3a1">  2 ok</text>
+    <text x="160" y="392" fill="#6c7086">  2 hosts  2526ms total</text>
+
+    <!-- cursor -->
+    <rect x="338" y="408" width="8" height="16" fill="#cdd6f4">
+      <animate attributeName="opacity" values="0;1;0" dur="1s" repeatCount="indefinite"/>
+    </rect>
+  </g>
+</svg>
