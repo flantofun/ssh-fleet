@@ -44,9 +44,12 @@ node dist/cli.js help
 git diff --check
 ```
 
-The Docker Compose files are included for reproducible judge testing. Docker was
-not available in the Codex workspace, so that environment is documented and
-statically reviewed but must be smoke-tested on a Docker-enabled machine.
+The automated `npm run judge` walkthrough was also run successfully from a fresh
+clone on a Debian Linux server with Docker and legacy Docker Compose 1.29.2. It
+built and started two disposable SSH hosts, waited for readiness, and verified
+`list`, concurrent `exec`, tag targeting, JSON output, multi-line `run`, and SFTP
+push/pull before removing the containers, volumes, and network. The judge script
+supports both `docker compose` and `docker-compose`.
 
 ## Codex Session ID
 
