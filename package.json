@@ -12,6 +12,7 @@
   "scripts": {
     "build": "tsc",
     "dev": "tsx src/cli.ts",
+    "judge": "node scripts/judge.mjs",
     "typecheck": "tsc --noEmit",
     "test": "tsx --test test/*.test.ts",
     "prepublishOnly": "npm run build"

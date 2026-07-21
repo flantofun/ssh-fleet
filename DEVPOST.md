@@ -30,10 +30,12 @@ result order. The configuration loader resolves defaults and SSH credentials,
 and the output layer supports both human-readable summaries and structured JSON.
 The project ships with automated tests and a cross-platform CI matrix.
 
-Codex with GPT-5.6 was used as an engineering partner for the core workflow: it
-reviewed the command architecture, implemented the multi-line `run` command,
-strengthened execution-option validation, added tests, and prepared the project
-for reproducible judging. The submitted Codex Session ID documents that work.
+SSH Fleet was created from scratch through an AI-native vibe coding workflow with
+Codex using GPT-5.6. The builder originated the product idea, directed the work
+through prompts and live feedback, tested each workflow, evaluated tradeoffs, and
+made the final decisions. GPT-5.6 generated and refined the implementation, tests,
+Docker judge environment, documentation, and submission assets. The submitted
+Codex Session ID documents that end-to-end process.
 
 **Codex Session ID:** `019f7e47-30f2-70f2-896f-4d4523f71227`
 
@@ -72,6 +74,7 @@ cd ssh-fleet
 npm install
 npm test
 npm run build
+npm run judge
 node dist/cli.js help
 ```
 

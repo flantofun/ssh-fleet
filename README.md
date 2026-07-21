@@ -168,6 +168,16 @@ ssh-fleet copy pull /var/log/syslog ./syslog --hosts web-1
 The Docker demo starts two disposable SSH hosts on your machine, so the complete
 workflow can be judged without cloud credentials or existing infrastructure.
 
+For the automated walkthrough:
+
+```bash
+npm install
+npm run judge
+```
+
+This builds the CLI, starts the hosts, waits for SSH, exercises commands, scripts,
+JSON output, targeting, SFTP push/pull, and then removes the containers.
+
 ```bash
 npm install && npm run build
 docker compose -f examples/docker-demo/compose.yml up -d --build
@@ -302,11 +312,12 @@ node dist/cli.js exec 'uptime'
 
 ## Built with Codex + GPT-5.6
 
-SSH Fleet's Build Week iteration was developed with Codex using GPT-5.6. Codex
-reviewed the command architecture, implemented the multi-line `run` workflow,
-strengthened option validation, added tests, and prepared the reproducible judge
-experience. See [CODEX_BUILD_LOG.md](CODEX_BUILD_LOG.md) for the implementation
-record and verification evidence.
+SSH Fleet was created from scratch through an AI-native vibe coding workflow with
+Codex using GPT-5.6. The builder supplied the product idea, requirements, iterative
+feedback, testing, and final decisions; Codex generated and refined the TypeScript
+implementation, tests, Docker judge environment, documentation, and submission
+assets. See [CODEX_BUILD_LOG.md](CODEX_BUILD_LOG.md) for the implementation record
+and verification evidence.
 
 ## License
 

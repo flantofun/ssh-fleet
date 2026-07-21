@@ -1,21 +1,23 @@
 # Codex + GPT-5.6 Build Log
 
-SSH Fleet's OpenAI Build Week iteration was built in collaboration with Codex
-using GPT-5.6 on July 20, 2026.
+SSH Fleet was created from scratch for OpenAI Build Week through an AI-native vibe
+coding workflow with Codex using GPT-5.6 on July 20, 2026.
 
 ## Core contribution
 
-The Codex session inspected the existing TypeScript CLI and selected the roadmap's
-multi-line script workflow as the highest-impact addition for real operators.
-It then:
+The builder started with the product idea: one compact CLI for safe, repeatable
+operations across SSH hosts. Through prompts, live feedback, testing, and product
+decisions, the builder directed Codex GPT-5.6 from a blank starting point to the
+submitted tool. The session:
 
-1. Extracted shared execution setup from the existing `exec` command.
-2. Implemented `ssh-fleet run <script-file>` while preserving all host selection,
+1. Designed the TypeScript CLI, inventory format, command structure, and bounded
+   parallel execution workflow.
+2. Implemented `ssh-fleet run <script-file>` with host selection,
    concurrency, timeout, fail-fast, configuration, and output options.
 3. Added explicit validation for concurrency, timeout, and output mode values.
 4. Added tests for exact multi-line loading, UTF-8 BOM handling, and empty files.
 5. Added a disposable two-host Docker environment for judge testing.
-6. Found and fixed an existing `list --config <path>` forwarding bug during the
+6. Found and fixed a `list --config <path>` forwarding bug during the
    end-to-end judge walkthrough.
 7. Diagnosed the remote CI failure, corrected absolute `init --path` handling, and
    made the smoke test portable across Linux, macOS, and Windows.
@@ -23,10 +25,11 @@ It then:
 
 ## Why Codex mattered
 
-Codex accelerated work across architecture, implementation, tests, documentation,
-and release verification in one continuous session. It reused the repository's
-existing parser and execution engine instead of introducing a new dependency or
-a parallel command path, keeping the change small and consistent with the codebase.
+Codex made it possible to move from idea to a functioning, tested developer tool
+in one continuous session. The builder remained responsible for the concept,
+requirements, iterative feedback, hands-on validation, tradeoffs, and final
+decisions, while GPT-5.6 generated and refined the implementation and supporting
+assets.
 
 ## Verification evidence
 
