@@ -2,7 +2,8 @@ import { spawnSync } from "node:child_process";
 import { writeFileSync, rmSync } from "node:fs";
 import { resolve } from "node:path";
 
-const compose = ["compose", "-f", "examples/docker-demo/compose.yml"];
+const composeFile = "examples/docker-demo/compose.yml";
+let composeCommand = ["docker", "compose"];
 const config = "examples/docker-demo/ssh-fleet.yml";
 const fixture = resolve("examples/docker-demo/judge-upload.txt");
 const pulled = resolve("examples/docker-demo/judge-download");
@@ -18,6 +19,28 @@ function run(command, args, options = {}) {
 
 function fleet(args, options) {
   run(process.execPath, ["dist/cli.js", ...args, "--config", config], options);
+}
+
+function configureCompose() {
+  const plugin = spawnSync("docker", ["compose", "version"], { stdio: "ignore" });
+  if (plugin.status === 0) return;
+
+  const legacy = spawnSync("docker-compose", ["--version"], { stdio: "ignore" });
+  if (legacy.status === 0) {
+    composeCommand = ["docker-compose"];
+    return;
+  }
+
+  throw new Error("Docker Compose is not installed");
+}
+
+function compose(args) {
+  run(composeCommand[0], [
+    ...composeCommand.slice(1),
+    "-f",
+    composeFile,
+    ...args,
+  ]);
 }
 
 function waitForSsh() {
@@ -38,9 +61,9 @@ let failure;
 
 try {
   run("docker", ["--version"]);
-  run("docker", ["compose", "version"]);
+  configureCompose();
   run("npm", ["run", "build"]);
-  run("docker", [...compose, "up", "-d", "--build"]);
+  compose(["up", "-d", "--build"]);
   waitForSsh();
 
   fleet(["list"]);
@@ -58,9 +81,11 @@ try {
   rmSync(fixture, { force: true });
   rmSync(`${pulled}.web-1`, { force: true });
   rmSync(`${pulled}.web-2`, { force: true });
-  spawnSync("docker", [...compose, "down", "--volumes", "--remove-orphans"], {
-    stdio: "inherit",
-  });
+  spawnSync(
+    composeCommand[0],
+    [...composeCommand.slice(1), "-f", composeFile, "down", "--volumes", "--remove-orphans"],
+    { stdio: "inherit" },
+  );
 }
 
 if (failure) {
